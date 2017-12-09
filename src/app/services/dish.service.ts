@@ -10,5 +10,13 @@ export class DishService {
   getDishes(): Dish[] { // This is a 'method' that returns the DISHES constant that is imported from the dish service.
     return DISHES;
   } // now we need to inject this service into our application, so open app_module.ts  
-}
 
+  getDish(id: number): Dish {
+    return DISHES.filter((dish) => (dish.id=== id))[0];
+  }
+
+  getFeaturedDish(): Dish {
+    return DISHES.filter((dish) => (dish.featured))[0];
+  }
+
+}

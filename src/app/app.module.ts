@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component' //now that this is imported, declare it by going into the NgModule section as a provider.
 
 import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -41,7 +42,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [DishService], //Use this for when you have a service when you want to make it available to all the components within your applicatio 
+  providers: [DishService,
+  PromotionService], //Use this for when you have a service when you want to make it available to all the components within your application. 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

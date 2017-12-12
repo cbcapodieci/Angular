@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component' //now that this i
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
+import { LeaderService } from './services/leader.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -42,8 +43,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [DishService,
-  PromotionService], //Use this for when you have a service when you want to make it available to all the components within your application. 
+  providers: [DishService, //providers: Use this for when you have a service when you want to make it available to all the components within your application.
+  PromotionService,
+  LeaderService],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

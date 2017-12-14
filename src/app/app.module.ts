@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import 'hammerjs';
 
@@ -45,7 +46,7 @@ import { LoginComponent } from './login/login.component';
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   providers: [DishService, //providers: Use this for when you have a service when you want to make it available to all the components within your application.
   PromotionService,

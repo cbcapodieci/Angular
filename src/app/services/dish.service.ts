@@ -7,16 +7,16 @@ export class DishService {
 
   constructor() { }
 
-  getDishes(): Dish[] { // This is a 'method' that returns the DISHES constant that is imported from the dish service.
-    return DISHES;
-  } // now we need to inject this service into our application, so open app_module.ts  
+  getDishes(): Promise<Dish[]> { // This is a 'method' that returns the DISHES constant that is imported from the dish service.
+    return Promise.resolve(DISHES); // now we need to inject this service into our application, so open app_module.ts
+  }   
 
-  getDish(id: number): Dish {
-    return DISHES.filter((dish) => (dish.id=== id))[0];
+  getDish(id: number): Promise<Dish> {
+    return Promise.resolve(DISHES.filter((dish) => (dish.id === id))[0]);
   }
 
-  getFeaturedDish(): Dish {
-    return DISHES.filter((dish) => (dish.featured))[0];
+  getFeaturedDish(): Promise<Dish> {
+    return Promise.resolve(DISHES.filter((dish) => (dish.featured))[0]);
   }
 
 }

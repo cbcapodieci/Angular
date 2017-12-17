@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Params, ActivatedRoute } from '@angular/router';
@@ -20,7 +20,6 @@ export class DishdetailComponent implements OnInit {
   dishdetailForm: FormGroup;
   comment: Comment;
   dish: Dish;
-  dishcopy = null;
   dishIds: number[];
   prev: number;
   next: number;
@@ -47,7 +46,8 @@ export class DishdetailComponent implements OnInit {
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
-    private fb: FormBuilder) { 
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) { 
       this.createForm();
     }
 
@@ -56,7 +56,7 @@ export class DishdetailComponent implements OnInit {
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params
       .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); });
+      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
   }
 
   setPrevNext(dishId: number) {
@@ -102,9 +102,7 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.dishdetailForm.value;
     this.comment.date = (new Date()).toString();
-    this.dishcopy.comments.push(this.comment);
-    this.dishcopy.save()
-      .subscribe(dish => this.dish = dish);
+    this.dish.comments.push(this.comment);
     this.dishdetailForm.reset({
       author: '',
       comment: '',

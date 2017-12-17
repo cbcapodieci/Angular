@@ -21,9 +21,12 @@ import { ContactComponent } from './contact/contact.component' //now that this i
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
+
+import { baseURL } from './shared/baseurl';
 
 
 @NgModule({
@@ -50,7 +53,9 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [DishService, //providers: Use this for when you have a service when you want to make it available to all the components within your application.
   PromotionService,
-  LeaderService],
+  LeaderService,
+  { provide: 'BaseURL', useValue: baseURL },
+  ProcessHTTPMsgService],
 
   entryComponents:[
     LoginComponent

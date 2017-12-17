@@ -47,5 +47,47 @@
   <div [hidden]="dish">
     <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
   </div>
+
+  <md-list>
+    <md-list-item *ngIf="dishdetailForm.valid">
+      <p md-line>{{dishdetailForm.value.comment}}</p>
+      <p md-line>{{dishdetailForm.value.rating}} Stars</p>
+      <p md-line>--{{dishdetailForm.value.author}}</p>
+    </md-list-item>
+
+    <form novalidate [formGroup]="dishdetailForm" (ngSubmit)="onSubmit()">
+      <p> <!-- This part sets up the name input along with validation -->
+        <md-input-container class="half-width"
+            dividerColor="{{ formErrors.author ? 'warn': 'primary' }}">
+          <input mdInput formControlName="author" placeholder="Name" type="text" required>
+        <md-hint>
+          <span [hidden]="(!formErrors.author)">{{formErrors.author}}</span>
+        </md-hint>
+      </md-input-container>
+        <!-- This part sets up the rating input -->
+        <md-slider step="1" thumbLabel tickInterval="1" min="0" max="5"  formControlName="rating" value="rating">
+        </md-slider>
+      </p>
+      <p> <!-- This part sets up the comment input along with validation -->
+        <md-input-container class="full-width">
+          <textarea mdInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+        </md-input-container>
+        <md-hint>
+            <span [hidden]="(!formErrors.comment)">{{formErrors.comment}}</span>
+        </md-hint>
+      </p>
+      <button type="submit" md-button class="background-primary text-floral-white"
+        [disabled]="dishdetailForm.invalid">Submit</button>
+    </form>
+  </md-list>
+ 
+  <div [hidden]="dish || errMess">
+    <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
   
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
 </div>
+  

@@ -1,32 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Leader } from "../shared/leader";
 import { Http, Response } from '@angular/http';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
-
 import { Restangular } from 'ngx-restangular';
+import { Feedback} from "../shared/feedback";
+
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 
 @Injectable()
-export class LeaderService {
+export class FeedbackService {
 
   constructor(private restangular: Restangular,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
-  getLeaders(): Observable<Leader[]> {
-    return this.restangular.all('leaders').getList();
-  }
-
-  getLeader(id: number): Observable<Leader> {
-  	return this.restangular.one('leaders', id).get();
-  }
-
-  getFeaturedLeader(): Observable<Leader> {
-    return this.restangular.all('leaders').getList({featured: true})
-      .map(res => res[0]);
+  submitFeedback(feed): Observable<Feedback> {
+    return this.restangular.all('feedback').post(feed);
   }
 
 }
